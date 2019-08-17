@@ -1,3 +1,4 @@
 *.exe
 .exercism/
 scratch*.go
+.go/
