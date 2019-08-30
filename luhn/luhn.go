@@ -22,20 +22,6 @@ func validations(s string) bool {
 	return true
 }
 
-func reverse(in string) string {
-	var sb strings.Builder
-	runes := []rune(in)
-	for i := len(runes) - 1; 0 <= i; i-- {
-		sb.WriteRune(runes[i])
-	}
-	return sb.String()
-}
-
-// charToInt convert rune/char to integer/digit
-func charToInt(c rune) int {
-	return int(c - '0')
-}
-
 //Valid determine for a given number whether or not it is valid per Luhn formula
 func Valid(s string) bool {
 	// remove all empty spaces
@@ -46,15 +32,13 @@ func Valid(s string) bool {
 		return false
 	}
 
-	for i, r := range reverse(s) {
-		iv := charToInt(r)
-		if (i+1)%2 == 0 {
+	for i := range s {
+		iv := int(s[len(s)-1-i] - '0')
+		if i%2 == 1 {
 			if v := iv * 2; v < 10 {
 				counter += v
 			} else {
-				for _, d := range strconv.Itoa(v) {
-					counter += charToInt(d)
-				}
+				counter += (v - 9)
 			}
 		} else {
 			counter += iv
